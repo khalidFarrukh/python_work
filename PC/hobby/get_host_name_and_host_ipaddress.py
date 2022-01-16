@@ -7,4 +7,7 @@ def main():
     ip_address = socket.gethostbyname(host_name)
     print("Host name : ", host_name)
     print("Host IP   : ", ip_address)
-main()
+
+
+if __name__ == "__main__":
+    main()
