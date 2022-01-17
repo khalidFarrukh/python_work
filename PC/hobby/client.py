@@ -1,9 +1,11 @@
 import socket
 
-host = "192.168.0.105"
-port = 1025
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((host, port))
+host_name = socket.gethostname()
+host_ip = socket.gethostbyname(host_name)
+print(host_name, " ", host_ip)
+port = 1025
+s.connect((host_ip, port))
 msg = ""
 while True:
     temp = s.recv(8)
@@ -11,3 +13,4 @@ while True:
         break
     msg += temp.decode("utf-8")
 print(msg)
+s.close()
