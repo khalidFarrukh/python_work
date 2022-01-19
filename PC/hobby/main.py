@@ -1,5 +1,8 @@
-import mysql.connector as msc
-mydb = msc.connect(host = "localhost", user = "Farrukh", passwd = "howdy1500HIhiHI")
+name = "Farrukh khalid"
+age = 23
+print(name, " is ", age)
 
-print(mydb)
+print(str(name) + " is " + str(age))
+
+print(f"{name} is {age}")
 
