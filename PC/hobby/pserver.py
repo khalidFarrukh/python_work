@@ -25,10 +25,12 @@ try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
     s.bind(local_EP)
     while True:
-        message = "Socket programming in python"
+        print("Enter your message : ", end="")
+        # message = "Socket programming in python"
+        message = input()
         if message == "exit-99":
             break
-        s.listen(10)
+        s.listen(2)
         print("waiting for a connection....")
         handler = s.accept()
         if handler != None:
