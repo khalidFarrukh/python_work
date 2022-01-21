@@ -1,4 +1,5 @@
 import socket
+import keyboard
 
 # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # host_name = socket.gethostname()
@@ -16,7 +17,7 @@ import socket
 # s.close()
 
 # --------------------------------------------------------------
-hip = "192.168.0.105"
+hip = "192.168.0.103"
 port = 1025
 local_EP = (hip, port)
 try:
@@ -25,7 +26,7 @@ try:
         s.connect(local_EP)
         msg = ""
         while True:
-            
+            key = keyboard.read_key()
             a = 0
     except NameError:
         print(NameError)
