@@ -30,12 +30,14 @@ try:
         message = input()
         if message == "exit-99":
             break
-        s.listen(2)
+        s.listen(10)
         print("waiting for a connection....")
         handler = s.accept()
+        i = 0
         if handler != None:
             clnt, c_address = handler
             print(f"connection to {c_address} established")
+            print("")
             clnt.send(message.encode("utf-8"))
             clnt.close()
     s.close()

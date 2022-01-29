@@ -25,7 +25,7 @@ try:
     try:
         while True:
             s.connect(local_EP)
-            msg = s.recv(1024).decode("utf-8")
+            s.send(message.encode("utf-8"))
             print(msg)
         #     key = keyboard.read_key()
         #     a = 0
