@@ -31,5 +31,5 @@ while True:
     if msg == "esc":
         s.close()
         break
-    time.sleep(0.1)
     s.close()
+    time.sleep(0.1)
