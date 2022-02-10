@@ -19,7 +19,6 @@ import time
 
 # --------------------------------------------------------------
 hip = "192.168.0.105"
-# hip = "10.0.2.15"
 port = 1025
 local_EP = (hip, port)
 while True:
@@ -28,5 +27,8 @@ while True:
     msg = keyboard.read_key()
     s.send(str(msg).encode("utf-8"))
     print(msg)
+    if msg == "esc":
+        s.close()
+        break
     s.close()
-    time.sleep(0.5)
+    time.sleep(0.1)

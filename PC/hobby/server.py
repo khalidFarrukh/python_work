@@ -18,7 +18,6 @@ import socket
 # s.close()
 
 # --------------------------------------------------------------
-# host_ip = socket.gethostbyname(socket.gethostname())
 host_ip = "192.168.0.105"
 port = 1025
 local_EP = (host_ip, port)
@@ -31,5 +30,9 @@ while True:
     print(f"connection to {c_address} established")
     print("")
     msg = clnt.recv(1024).decode("utf-8")
-    print(msg)
+    clnt.close()
+    if msg == "esc":
+        print("client closed by user")
+    else:
+        print(msg)
     s.close()
