@@ -18,9 +18,9 @@ import socket
 # s.close()
 
 # --------------------------------------------------------------
-host_ip = "192.168.0.105"
+hip = "192.168.0.105"
 port = 1025
-local_EP = (host_ip, port)
+local_EP = (hip, port)
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
     s.bind(local_EP)
