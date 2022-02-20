@@ -19,7 +19,7 @@ import subprocess
 # s.close()
 
 # --------------------------------------------------------------
-hip = "192.168.0"
+hip = "192.168.0.105"
 port = 1025
 local_EP = (hip, port)
 while True:
