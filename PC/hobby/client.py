@@ -20,7 +20,7 @@ import subprocess
 
 # --------------------------------------------------------------
 hip = "192.168.0.105"
-port = 0
+port = 1025
 local_EP = (hip, port)
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
