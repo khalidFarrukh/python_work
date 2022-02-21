@@ -27,9 +27,9 @@ while True:
     video_out.write(frame)
     # show the frame
     # cv2.imshow("screenshot", frame)
-    # if the user clicks q, it exits- 
+    # if the user clicks q, it exits-
     if kb.is_pressed("q"):
         break
 # make sure everything is closed when exited
-cv2.destroyAllWindows()
 video_out.release()
+cv2.destroyAllWindows()
