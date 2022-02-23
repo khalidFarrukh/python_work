@@ -64,6 +64,6 @@ while True:
     clnt.send(str(msg).encode("utf-8"))
     clnt.close()
     s.close()
-    time.sleep(0.1)
+    # time.sleep(0.1)
 
 # --------------------------------------------------------------------------
