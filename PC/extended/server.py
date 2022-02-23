@@ -75,7 +75,7 @@ def get_screen():
 # servers --- > server
 def send_mouse_position():
     hip = "192.168.0.105"
-    port = 1025
+    port = 1026
     local_s_ep = (hip, port)
     while True:
         local_ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
