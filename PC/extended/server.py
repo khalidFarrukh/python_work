@@ -62,8 +62,12 @@ def get_screen():
     while True:
         local_sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_sc.connect(remote_s_ep)
-
-        temp = local_sc.recv(6220800)
+        temp = b""
+        while True:
+            packet = local_sc.recv(500000)
+            if not packet: 
+                break
+            temp += packet
         frame = pickle.loads(temp)
         # convert colors from BGR to RGB
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -92,7 +96,7 @@ def send_mouse_position():
 
 
 Thread(target=get_screen).start()
-# Thread(target=send_mouse_position).start()
+Thread(target=send_mouse_position).start()
 
 
 # --------------------------------------------------------------------------

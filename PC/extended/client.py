@@ -81,3 +81,4 @@ def get_mouse_position():
 
 
 Thread(target=send_screen).start()
+Thread(target=get_mouse_position).start()
