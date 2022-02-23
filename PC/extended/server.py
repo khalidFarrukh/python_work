@@ -49,30 +49,21 @@ import time
 # --------------------------------------------------------------
 
 hip = "192.168.0.105"
-port1 = 1025
-port2 = 1026
-local_EP1 = (hip, port1)
-# local_EP2 = (hip, port2)
+port = 1025
+local_EP = (hip, port)
 while True:
-    s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-    # s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-    s1.bind(local_EP1)
-    # s2.bind(local_EP2)
-    s1.listen(10)
-    # s2.listen(10)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+    s.bind(local_EP)
+    s.listen(10)
     print("waiting for a connection 1....")
-    clnt1, c_address1 = s1.accept()
-    print(f"connection to {c_address1} established")
+    clnt, c_address = s.accept()
+    print(f"connection to {c_address} established")
     print("")
 
-    # print("waiting for a connection 2....")
-    # clnt2, c_address2 = s2.accept()
-    # print(f"connection to {c_address2} established")
-    # print("")
-
     msg = list(mouse.get_position())  # mouse location
-    s1.send(str(msg).encode("utf-8"))
-    s1.close()
+    clnt.send(str(msg).encode("utf-8"))
+    clnt.close()
+    s.close()
     time.sleep(0.1)
 
 # --------------------------------------------------------------------------
