@@ -78,4 +78,4 @@ def get_mouse_position():
         local_cc.close()
 
 
-Thread(target=send_screen).start()
+Thread(target=send_screen, daemon=True).start()
