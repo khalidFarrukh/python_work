@@ -7,6 +7,7 @@ import mouse
 import pickle
 import pyautogui
 import cv2
+import numpy as np
 
 # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # host_name = socket.gethostname()
@@ -60,7 +61,8 @@ def send_screen():
         print(f"connection to {r_sc_address} established")
         print("")
         img = pyautogui.screenshot()
-        remote_sc.send(pickle.dumps(img))
+        frame = np.array(img)
+        remote_sc.send(pickle.dumps(frame))
         remote_sc.close()
         local_cs.close()
 
