@@ -42,19 +42,40 @@ import cv2
 
 # --------------------------------------------------------------
 
-hip = "192.168.0.105"
-port1 = 1025
-port2 = 1026
-local_EP1 = (hip, port1)
-local_EP2 = (hip, port2)
-while True:
-    s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-    s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-    s1.connect(local_EP1)
-    s2.connect(local_EP2)
-    img = pyautogui.screenshot()
+SCREEN_SIZE = tuple(pyautogui.size())
+g_m_p_check = False
+s_s_f_check = False
 
-    msg = s.recv(1024).decode("utf-8")
-    msg = eval(msg)
-    mouse.move(msg[0], msg[1])
-    s.close()
+
+def send_screen():
+    hip = "192.168.0.104"
+    port = 1025
+    local_s_ep = (hip, port)
+    while True:
+        local_cs = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+        local_cs.bind(local_s_ep)
+        local_cs.listen(10)
+        print("client to server : waiting for a connection")
+        remote_sc, r_sc_address = local_cs.accept()
+        print(f"connection to {r_sc_address} established")
+        print("")
+        img = pyautogui.screenshot()
+        remote_sc.send(pickle.dumps(img))
+        remote_sc.close()
+        local_cs.close()
+
+
+def get_mouse_position():
+    rhip = "192.168.0.105"
+    port = 1026
+    remote_s_ep = (rhip, port)
+    while True:
+        local_cc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+        local_cc.connect(remote_s_ep)
+        temp = local_cc.recv(1024)
+        m_pos = pickle.loads(temp)
+        mouse.move(m_pos[0], m_pos[1])
+        local_cc.close()
+
+
+Thread(target=send_screen).start()
