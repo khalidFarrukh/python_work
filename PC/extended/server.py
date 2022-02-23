@@ -63,7 +63,7 @@ def get_screen():
         local_sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_sc.connect(remote_s_ep)
 
-        temp = local_sc.recv(SCREEN_SIZE[0] * SCREEN_SIZE[1])
+        temp = local_sc.recv()
         img = pickle.loads(temp)
         frame = np.array(img)
         # convert colors from BGR to RGB
