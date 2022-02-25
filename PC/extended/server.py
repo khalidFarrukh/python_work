@@ -76,7 +76,7 @@ def get_screen():
             window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN
         )
         cv2.imshow(window_name, frame)
-        if cv2.waitKey(25) & kb.is_pressed("esc"):
+        if cv2.waitKey() & kb.is_pressed("esc"):
             cv2.destroyAllWindows()
             break
         cv2.destroyAllWindows()
