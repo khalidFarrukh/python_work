@@ -103,7 +103,7 @@ def send_mouse_position():
         local_ss.close()
 
 
-# Thread(target=get_screen).start()
+Thread(target=get_screen).start()
 Thread(target=send_mouse_position).start()
 
 
