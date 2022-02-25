@@ -53,7 +53,8 @@ def send_screen():
     port = 1025
     local_s_ep = (hip, port)
     while True:
-        local_cs = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+        local_cs = socket.socket(
+            socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_cs.bind(local_s_ep)
         local_cs.listen(10)
         print("client to server : waiting for a connection")
@@ -73,7 +74,8 @@ def get_mouse_position():
     port = 1026
     remote_s_ep = (rhip, port)
     while True:
-        local_cc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+        local_cc = socket.socket(
+            socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_cc.connect(remote_s_ep)
         temp = local_cc.recv(1024)
         m_pos = pickle.loads(temp)
@@ -81,5 +83,5 @@ def get_mouse_position():
         local_cc.close()
 
 
-# Thread(target=send_screen).start()
+Thread(target=send_screen).start()
 Thread(target=get_mouse_position).start()
