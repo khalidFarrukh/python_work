@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PC",
+    "\\PC\\extended"
   ],
-  "SelectedNode": "\\D:\\khalidFarrukh\\python_work",
+  "SelectedNode": "\\PC\\extended\\temp1.py",
   "PreviewInSolutionExplorer": false
 }

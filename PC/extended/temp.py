@@ -14,7 +14,7 @@ while(True):
     cv2.moveWindow(window_name, SCREEN_SIZE[0] - 1, SCREEN_SIZE[1] - 1)
     cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
     cv2.imshow(window_name, frame)
-    if cv2.waitKey() & kb.is_pressed('esc'):
+    if kb.is_pressed('esc'):
         cv2.destroyAllWindows()
         break
     cv2.destroyAllWindows()
