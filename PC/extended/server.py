@@ -64,14 +64,22 @@ def get_screen():
         local_sc.connect(remote_s_ep)
         temp = b""
         while True:
-            packet = local_sc.recv(500000)
-            if not packet: 
+            packet = local_sc.recv(1048576)
+            if not packet:
                 break
             temp += packet
         frame = pickle.loads(temp)
-        # convert colors from BGR to RGB
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        cv2.imshow("Frame", frame)
+        window_name = "live screen"
+        cv2.namedWindow(window_name, cv2.WND_PROP_FULLSCREEN)
+        cv2.moveWindow(window_name, SCREEN_SIZE[0] - 1, SCREEN_SIZE[1] - 1)
+        cv2.setWindowProperty(
+            window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN
+        )
+        cv2.imshow(window_name, frame)
+        if cv2.waitKey(25) & kb.is_pressed("esc"):
+            cv2.destroyAllWindows()
+            break
+        cv2.destroyAllWindows()
         local_sc.close()
 
 

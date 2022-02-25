@@ -62,6 +62,7 @@ def send_screen():
         print("")
         img = pyautogui.screenshot()
         frame = np.array(img)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         remote_sc.send(pickle.dumps(frame))
         remote_sc.close()
         local_cs.close()
