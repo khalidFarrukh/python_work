@@ -51,8 +51,8 @@ from threading import *
 #     s.close()
 # --------------------------------------------------------------
 SCREEN_SIZE = tuple(pyautogui.size())
-global thread1_faliure
-global thread2_faliure
+thread1_faliure=False
+thread2_faliure=False
 
 
 # servers --- > client
@@ -77,15 +77,17 @@ def get_screen():
             cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
             cv2.imshow(window_name, frame)
             if cv2.waitKey() & kb.is_pressed("esc"):
+                cv2.destroyAllWindows()
+                local_sc.close()
                 break
             cv2.destroyAllWindows()
             local_sc.close()
         except NameError as e:
             print(e)
+            cv2.destroyAllWindows()
             local_sc.close()
-            return -1
-
-    cv2.destroyAllWindows()
+            thread1_faliure=True
+            return False
 
 
 # servers --- > server
@@ -94,6 +96,8 @@ def send_mouse_position():
     port = 1026
     local_s_ep = (hip, port)
     while True:
+        if thread1_faliure==True:
+            return False
         local_ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_ss.bind(local_s_ep)
         local_ss.listen(10)
@@ -107,8 +111,12 @@ def send_mouse_position():
         remote_cs.close()
         local_ss.close()
 
-Thread(target=get_screen).start()
-Thread(target=send_mouse_position).start()
+t1 = Thread(target=get_screen)
+t2 = Thread(target=send_mouse_position)
+t1.start()
+t2.start()
+if t1.join()==False:
+    t2.join()
 
 
 # --------------------------------------------------------------------------
