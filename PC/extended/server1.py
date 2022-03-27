@@ -57,7 +57,7 @@ thread2_faliure=False
 
 # servers --- > client
 def get_screen():
-    rhip = "192.168.0.104"
+    rhip = "192.168.0.106"
     port = 1025
     remote_s_ep = (rhip, port)
     while True:

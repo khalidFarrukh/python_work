@@ -49,7 +49,7 @@ s_s_f_check = False
 
 
 def send_screen():
-    hip = "192.168.0.104"
+    hip = "192.168.0.106"
     port = 1025
     local_s_ep = (hip, port)
     while True:
