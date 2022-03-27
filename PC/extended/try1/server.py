@@ -58,7 +58,7 @@ def send_mouse_position():
         local_ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_ss.bind(local_s_ep)
         local_ss.listen(10)
-        print("waiting for a connection 1....")
+        print("waiting for a connection ....")
         remote_cs, r_cs_address = local_ss.accept()
         print(f"connection to {r_cs_address} established")
         print("")
