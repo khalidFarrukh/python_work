@@ -69,8 +69,8 @@ def send_mouse_position():
         remote_cs.close()
         local_ss.close()
 
-t1 = Thread(target=get_screen)
-t2 = Thread(target=send_mouse_position)
+t1 = Thread(target=send_mouse_position)
+t2 = Thread(target=get_screen)
 t1.start()
 t2.start()
 t1.join()
