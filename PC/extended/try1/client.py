@@ -77,7 +77,7 @@ def get_mouse_position():
         local_cc.connect(remote_s_ep)
         temp = local_cc.recv(1024)
         m_pos = pickle.loads(temp)
-        mouse.move(m_pos[0], m_pos[1])
+        mouse.move((m_pos[0]*SCREEN_SIZE[0])/1920, (m_pos[1]*SCREEN_SIZE[1])/1200)
         local_cc.close()
 
 
