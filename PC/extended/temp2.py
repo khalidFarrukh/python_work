@@ -1,19 +1,11 @@
-from tkinter import *
-import time
-class App:
-    def __init__(self, master):
-        self.slogan = Button(command=self.change)
-        self.slogan.pack()
-        self.title('abc')
-        self.geometry('300x200')
-        self.config(bg='#4a7a8c')
-    def change(self):
-        self.slogan.configure(bg='red')
-        self.slogan.after(1000, self.change_back)
-
-    def change_back(self):
-        self.slogan.configure(bg='blue')
-
-root = Tk()
-app = App(root)
-root.mainloop()
+import pickle as pk
+import cv2
+import pyautogui
+import numpy as np
+import keyboard as kb
+from PIL import ImageTk, Image
+f1 = Image.Image.convert(pyautogui.screenshot(),'L')
+print(len(f1))
+cv2.imshow("frame image",f1)
+if cv2.waitKey() & kb.is_pressed("esc"):
+    cv2.destroyAllWindows()

@@ -81,5 +81,9 @@ def get_mouse_position():
         local_cc.close()
 
 
-Thread(target=send_screen).start()
-Thread(target=get_mouse_position).start()
+t1 =Thread(target=send_screen)
+t2 =Thread(target=get_mouse_position)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
