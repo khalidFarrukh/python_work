@@ -9,6 +9,7 @@ import pyautogui
 import cv2
 import numpy as np
 from PIL import ImageTk, Image
+import multiprocessing
 
 # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # host_name = socket.gethostname()
@@ -81,9 +82,9 @@ def get_mouse_position():
         local_cc.close()
 
 
-t1 =Thread(target=send_screen)
-t2 =Thread(target=get_mouse_position)
-t1.start()
-t2.start()
-t1.join()
-t2.join()
+p1 = multiprocessing.Process(target=send_screen,args=())
+p2 = multiprocessing.Process(target=get_mouse_position,args=())
+p1.start()
+p2.start()
+p1.join()
+p2.join()

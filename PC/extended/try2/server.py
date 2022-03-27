@@ -8,7 +8,8 @@ import numpy as np
 import keyboard as kb
 import mouse
 import time
-from threading import *
+from threading import*
+import multiprocessing
 
 SCREEN_SIZE = tuple(pyautogui.size())
 def get_screen():
@@ -47,9 +48,9 @@ def send_mouse_position():
         remote_cs.close()
         local_ss.close()
 
-t1 = Thread(target=send_mouse_position)
-t2 = Thread(target=get_screen)
-t1.start()
-t2.start()
-t1.join()
-t2.join()
+p1 = multiprocessing.Process(target=send_mouse_position,args=())
+p2 = multiprocessing.Process(target=get_screen,args=())
+p1.start()
+p2.start()
+p1.join()
+p2.join()
