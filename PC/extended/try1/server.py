@@ -23,6 +23,7 @@ def get_screen():
     port = 1025
     remote_s_ep = (rhip, port)
     while True:
+        print("getting_data")
         local_sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         try:
             local_sc.connect(remote_s_ep)
@@ -32,11 +33,11 @@ def get_screen():
                 if not packet:
                     break
                 temp += packet
-            #frame = pickle.loads(temp)
+            frame = pickle.loads(temp)
             #frame = pyautogui.screenshot()
             #d1 = pk.dumps(frame)
             #f1 = pk.loads(d1)
-            frame = Image.frombytes(temp)
+            #frame = Image.frombytes(temp)
             image2 = ImageTk.PhotoImage(frame)
             panel.configure(image=image2)
             panel.image = image2
