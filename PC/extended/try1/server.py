@@ -23,7 +23,6 @@ def get_screen():
     port = 1025
     remote_s_ep = (rhip, port)
     while True:
-        print("getting_data")
         local_sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         try:
             local_sc.connect(remote_s_ep)

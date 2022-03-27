@@ -62,9 +62,9 @@ def send_screen():
         print("client to server : waiting for a connection")
         remote_sc, r_sc_address = local_cs.accept()
         print(f"connection to {r_sc_address} established")
-        
-        msg = "i am super man"  # mouse location 
-        remote_sc.send(pickle.dumps(msg))
+        print("")
+        frame = Image.Image.convert(pyautogui.screenshot(),'L')
+        remote_sc.send(pickle.dumps(frame))
         remote_sc.close()
         local_cs.close()
 
@@ -77,13 +77,13 @@ def get_mouse_position():
         local_cc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_cc.connect(remote_s_ep)
         temp = local_cc.recv(1024)
-        rec_msg = pickle.loads(temp)
-        print(rec_msg)
+        m_pos = pickle.loads(temp)
+        mouse.move((m_pos[0]*SCREEN_SIZE[0])/1920, (m_pos[1]*SCREEN_SIZE[1])/1200)
         local_cc.close()
 
 
 if __name__ == "__main__":
-    #multiprocessing.freeze_support()
+    multiprocessing.freeze_support()
     p1 = multiprocessing.Process(target=send_screen,args=())
     p2 = multiprocessing.Process(target=get_mouse_position,args=())
     p1.start()

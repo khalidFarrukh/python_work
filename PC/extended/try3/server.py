@@ -13,6 +13,12 @@ import multiprocessing
 
 SCREEN_SIZE = tuple(pyautogui.size())
 def get_screen():
+    root = Tk()
+    frame = pyautogui.screenshot()
+    image2 = ImageTk.PhotoImage(frame)
+    panel = Label(root,image=image2)
+    panel.pack(side="bottom", fill="both", expand="yes")
+    root.attributes('-fullscreen', True)
     rhip = "192.168.0.107" # direct internet ip
     #rhip = "192.168.0.106" # wifi ip
     port = 1025
@@ -21,9 +27,24 @@ def get_screen():
         local_sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         try:
             local_sc.connect(remote_s_ep)
-            temp = local_sc.recv(1024)
-            rec_msg = pickle.loads(temp)
-            print(rec_msg)
+            temp = b""
+            while True:
+                packet = local_sc.recv(1048576)
+                if not packet:
+                    break
+                temp += packet
+            frame = pickle.loads(temp)
+            #frame = pyautogui.screenshot()
+            #d1 = pk.dumps(frame)
+            #f1 = pk.loads(d1)
+            #frame = Image.frombytes(temp)
+            image2 = ImageTk.PhotoImage(frame)
+            panel.configure(image=image2)
+            panel.image = image2
+            root.attributes('-fullscreen', True)
+            root.update()
+            if kb.is_pressed("esc"):
+                break
             local_sc.close()
         except NameError as e:
             print(e)
@@ -43,13 +64,13 @@ def send_mouse_position():
         print(f"connection to {r_cs_address} established")
         print("")
 
-        msg = "i am iron man"  # mouse location
-        remote_cs.send(pickle.dumps(msg))
+        m_pos = list(mouse.get_position())  # mouse location
+        remote_cs.send(pickle.dumps(m_pos))
         remote_cs.close()
         local_ss.close()
 
 if __name__ == "__main__":
-    #multiprocessing.freeze_support()
+    multiprocessing.freeze_support()
     p1 = multiprocessing.Process(target=send_mouse_position,args=())
     p2 = multiprocessing.Process(target=get_screen,args=())
     p1.start()
