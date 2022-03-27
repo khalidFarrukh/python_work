@@ -8,6 +8,7 @@ import pickle
 import pyautogui
 import cv2
 import numpy as np
+from PIL import ImageTk, Image
 
 # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # host_name = socket.gethostname()
@@ -61,9 +62,8 @@ def send_screen():
         remote_sc, r_sc_address = local_cs.accept()
         print(f"connection to {r_sc_address} established")
         print("")
-        img = pyautogui.screenshot()
-        frame = np.array(img)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = pyautogui.screenshot()
+        frame = Image.Image.convert(frame,'L')
         remote_sc.send(pickle.dumps(frame))
         remote_sc.close()
         local_cs.close()
