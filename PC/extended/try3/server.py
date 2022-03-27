@@ -49,7 +49,7 @@ def send_mouse_position():
         local_ss.close()
 
 if __name__ == "__main__":
-    multiprocessing.freeze_support()
+    #multiprocessing.freeze_support()
     p1 = multiprocessing.Process(target=send_mouse_position,args=())
     p2 = multiprocessing.Process(target=get_screen,args=())
     p1.start()

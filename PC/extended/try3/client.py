@@ -83,7 +83,7 @@ def get_mouse_position():
 
 
 if __name__ == "__main__":
-    multiprocessing.freeze_support()
+    #multiprocessing.freeze_support()
     p1 = multiprocessing.Process(target=send_screen,args=())
     p2 = multiprocessing.Process(target=get_mouse_position,args=())
     p1.start()
