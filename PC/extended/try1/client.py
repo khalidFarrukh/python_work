@@ -69,7 +69,7 @@ def send_screen():
 
 
 def get_mouse_position():
-    rhip = "192.168.0.105"
+    rhip = "192.168.0.105" # direct internet ip
     port = 1026
     remote_s_ep = (rhip, port)
     while True:

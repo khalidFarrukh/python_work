@@ -89,7 +89,7 @@ def get_screen():
 
 # servers --- > server
 def send_mouse_position():
-    hip = "192.168.0.105"
+    hip = "192.168.0.105" # direct internet ip
     port = 1026
     local_s_ep = (hip, port)
     while True:
