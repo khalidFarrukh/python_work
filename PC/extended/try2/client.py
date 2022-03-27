@@ -82,9 +82,11 @@ def get_mouse_position():
         local_cc.close()
 
 
-p1 = multiprocessing.Process(target=send_screen,args=())
-p2 = multiprocessing.Process(target=get_mouse_position,args=())
-p1.start()
-p2.start()
-p1.join()
-p2.join()
+if __name__ == "__main__":
+    #multiprocessing.freeze_support()
+    p1 = multiprocessing.Process(target=send_screen,args=())
+    p2 = multiprocessing.Process(target=get_mouse_position,args=())
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
