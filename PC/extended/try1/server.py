@@ -37,7 +37,7 @@ def get_screen():
             #d1 = pk.dumps(frame)
             #f1 = pk.loads(d1)
             #f1 = Image.frombytes()
-            f1 = Image.Image.convert(pyautogui.screenshot(),'L')
+            f1 = Image.Image.convert(frame,'L')
             image2 = ImageTk.PhotoImage(f1)
             panel.configure(image=image2)
             panel.image = image2
