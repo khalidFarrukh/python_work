@@ -1,5 +1,3 @@
-from ast import Name
-from concurrent.futures import thread
 import socket
 import cv2
 import numpy as np
