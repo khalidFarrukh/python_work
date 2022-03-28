@@ -63,8 +63,10 @@ def send_mouse_position():
         remote_cs, r_cs_address = local_ss.accept()
         print(f"connection to {r_cs_address} established")
         print("")
-
-        m_pos = list(mouse.get_position())  # mouse location
+        x,y = mouse.get_position()
+        x = (x*1920)/SCREEN_SIZE[0]
+        y = (y*1200)/SCREEN_SIZE[1]
+        m_pos = list(x,y)  # mouse location
         remote_cs.send(pickle.dumps(m_pos))
         remote_cs.close()
         local_ss.close()
