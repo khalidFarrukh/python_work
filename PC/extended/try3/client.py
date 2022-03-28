@@ -1,4 +1,5 @@
 import socket
+import click
 import keyboard as kb
 import time
 import subprocess
@@ -11,44 +12,7 @@ import numpy as np
 from PIL import ImageTk, Image
 import multiprocessing
 
-# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# host_name = socket.gethostname()
-# host_ip = socket.gethostbyname(host_name)
-# print(host_name, " ", host_ip)
-# port = 1025
-# s.connect((host_ip, port))
-# msg = ""
-# while True:
-#     temp = s.recv(8)
-#     if len(temp) == 0:
-#         break
-#     msg += temp.decode("utf-8")
-# print(msg)
-# s.close()
-
-# --------------------------------------------------------------
-
-# hip = "192.168.0.105"
-# port = 1025
-# local_EP = (hip, port)
-# while True:
-#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-#     s.connect(local_EP)
-#     msg = list(mouse.get_position())  # mouse location
-#     s.send(str(msg).encode("utf-8"))
-#     print(msg)
-#     if msg == "esc":
-#         s.close()
-#         break
-#     s.close()
-#     time.sleep(0.1)
-
-# --------------------------------------------------------------
-
 SCREEN_SIZE = tuple(pyautogui.size())
-g_m_p_check = False
-s_s_f_check = False
-
 
 def send_screen():
     hip = "192.168.0.107" # direct internet ip
@@ -81,6 +45,22 @@ def get_mouse_position():
         mouse.move(m_pos[0], m_pos[1])
         local_cc.close()
 
+def get_mouse_event():
+    rhip = "192.168.0.105" # direct internet ip
+    port = 1027
+    remote_s_ep = (rhip, port)
+    while True:
+        local_cc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+        local_cc.connect(remote_s_ep)
+        temp = local_cc.recv(2)
+        event = pickle.loads(temp)
+        if event == 'r':
+            mouse.click('right')
+        elif event=='l':
+            mouse.click('left')
+        elif event == 'm':
+            mouse.click('middle')
+        local_cc.close()
 
 if __name__ == "__main__":
     multiprocessing.freeze_support()
