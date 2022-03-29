@@ -56,10 +56,12 @@ def send_mouse_position():
         local_ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_ss.bind(local_s_ep)
         local_ss.listen(10)
+        print("\033[1;37;40m",end = "")
         print("waiting for a connection ....")
         remote_cs, r_cs_address = local_ss.accept()
         print(f"connection to {r_cs_address} established")
         print("")
+        print("\033[1;37;40m",end = "")
         m_pos = list(mouse.get_position())  # mouse location
         remote_cs.send(pickle.dumps(m_pos))
         remote_cs.close()
@@ -73,10 +75,12 @@ def send_mouse_event():
         local_ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_ss.bind(local_s_ep)
         local_ss.listen(10)
+        print("\033[1;37;40m",end = "")
         print("waiting for a connection ....")
         remote_cs, r_cs_address = local_ss.accept()
         print(f"connection to {r_cs_address} established")
         print("")
+        print("\033[1;37;40m",end = "")
         if mouse.is_pressed("right"):
             remote_cs.send(pickle.dumps("r"))
         elif mouse.is_pressed("left"):
