@@ -58,8 +58,8 @@ def get_mouse_event():
             mouse.click('right')
         elif event=='l':
             mouse.click('left')
-        # elif event == 'm':
-        #     mouse.click('middle')
+        elif event == 'm':
+            mouse.click('middle')
         local_cc.close()
 
 if __name__ == "__main__":
