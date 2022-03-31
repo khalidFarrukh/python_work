@@ -23,12 +23,10 @@ def send_screen():
         local_cs = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_cs.bind(local_s_ep)
         local_cs.listen(10)
-        print("\033[1;37;40m ")
         print("client to server : waiting for a connection")
         remote_sc, r_sc_address = local_cs.accept()
         print(f"connection to {r_sc_address} established")
         print("")
-        print("\033[1;37;40m ")
         frame = Image.Image.convert(pyautogui.screenshot(),'L')
         remote_sc.send(pickle.dumps(frame))
         remote_sc.close()
@@ -56,18 +54,15 @@ def get_mouse_event():
         local_cc.connect(remote_s_ep)
         temp = local_cc.recv(2)
         event = pickle.loads(temp)
-        print("\033[1;36;40m hellow \n")
-        print("                                                                event = ",event)
-        print("\033[1;37;40m welcome \n")
-        # if event == 'r':
-        #     # mouse.click('right')
-        #     print("                                  right")
-        # elif event=='l':
-        #     # mouse.click('left')
-        #     print("left")
-        # elif event == 'm':
-        #     # mouse.click('middle')
-        #     print("             middle")
+        if event == "r":
+            # mouse.click('right')
+            print("                                  right")
+        elif event=="l":
+            # mouse.click('left')
+            print("left")
+        elif event == "m":
+            # mouse.click('middle')
+            print("             middle")
         local_cc.close()
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ import time
 from threading import*
 import multiprocessing
 import os
+import win32api
 
 
 SCREEN_SIZE = tuple(pyautogui.size())
@@ -67,6 +68,27 @@ def send_mouse_position():
         remote_cs.close()
         local_ss.close()
 
+# def send_mouse_event():
+#     hip = "192.168.0.105" # direct internet ip
+#     port = 1027
+#     local_s_ep = (hip, port)
+#     while True:
+#         local_ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+#         local_ss.bind(local_s_ep)
+#         local_ss.listen(10)
+#         print("waiting for a connection ....")
+#         remote_cs, r_cs_address = local_ss.accept()
+#         print(f"connection to {r_cs_address} established")
+#         print("")
+#         if mouse.is_pressed("right"):
+#             remote_cs.send(pickle.dumps("r"))
+#         elif mouse.is_pressed("left"):
+#             remote_cs.send(pickle.dumps("l"))
+#         elif mouse.is_pressed("middle"):
+#             remote_cs.send(pickle.dumps("m"))
+#         remote_cs.close()
+#         local_ss.close()
+
 def send_mouse_event():
     hip = "192.168.0.105" # direct internet ip
     port = 1027
@@ -79,12 +101,16 @@ def send_mouse_event():
         remote_cs, r_cs_address = local_ss.accept()
         print(f"connection to {r_cs_address} established")
         print("")
-        if mouse.is_pressed("right"):
-            remote_cs.send(pickle.dumps("r"))
-        elif mouse.is_pressed("left"):
+        left_click_event = win32api.GetKeyState(0x01)
+        right_click_event = win32api.GetKeyState(0x02)
+        middle_click_event = win32api.GetKeyState(0x04)
+        if left_click_event<0:
             remote_cs.send(pickle.dumps("l"))
-        elif mouse.is_pressed("middle"):
+        if right_click_event<0:
+            remote_cs.send(pickle.dumps("r"))
+        if middle_click_event<0:
             remote_cs.send(pickle.dumps("m"))
+        time.sleep(0.1)
         remote_cs.close()
         local_ss.close()
 
