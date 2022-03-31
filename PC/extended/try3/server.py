@@ -105,11 +105,14 @@ def send_mouse_event():
         right_click_event = win32api.GetKeyState(0x02)
         middle_click_event = win32api.GetKeyState(0x04)
         if left_click_event<0:
-            remote_cs.send(pickle.dumps("l"))
+            data = ["l"]
+            remote_cs.send(pickle.dumps(data))
         if right_click_event<0:
-            remote_cs.send(pickle.dumps("r"))
+            data = ["r"]
+            remote_cs.send(pickle.dumps(data))
         if middle_click_event<0:
-            remote_cs.send(pickle.dumps("m"))
+            data = ["m"]
+            remote_cs.send(pickle.dumps(data))
         time.sleep(0.1)
         remote_cs.close()
         local_ss.close()
