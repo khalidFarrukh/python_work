@@ -53,9 +53,8 @@ def get_mouse_event():
         local_cc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_cc.connect(remote_s_ep)
         temp = local_cc.recv(10)
-        # if temp
         # event = pickle.loads(temp)
-        print("****************           ",temp,"         ********************")
+        print(len(temp),"  ****************           ",temp,"         ********************")
         # if event == "r":
         #     # mouse.click('right')
         #     print("                                  right")

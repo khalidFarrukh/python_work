@@ -113,7 +113,7 @@ def send_mouse_event():
         if middle_click_event<0:
             data = ["m"]
             remote_cs.send(pickle.dumps(data))
-        time.sleep(0.1)
+        # time.sleep(0.1)
         remote_cs.close()
         local_ss.close()
 
