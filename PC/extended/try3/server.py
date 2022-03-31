@@ -10,6 +10,8 @@ import mouse
 import time
 from threading import*
 import multiprocessing
+import os
+
 
 SCREEN_SIZE = tuple(pyautogui.size())
 
@@ -91,6 +93,7 @@ def send_mouse_event():
         local_ss.close()
 
 if __name__ == "__main__":
+    os.system("cls")
     multiprocessing.freeze_support()
     p1 = multiprocessing.Process(target=send_mouse_position,args=())
     p2 = multiprocessing.Process(target=get_screen,args=())

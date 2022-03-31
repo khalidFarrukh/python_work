@@ -78,11 +78,11 @@ def when_mouse_scroll(x, y, dx, dy):
     mouse_remote_cs.close()
     mouse_local_ss.close()
 
-def send_mouse_event():
-    with Listener(on_move=when_mouse_move, on_click=when_mouse_click, on_scroll=when_mouse_scroll) as listener:
+# def send_mouse_event():
+with Listener(on_move=when_mouse_move, on_click=when_mouse_click, on_scroll=when_mouse_scroll) as listener:
         listener.join()
-if __name__ == "__main__":
-    multiprocessing.freeze_support()
-    p1 = multiprocessing.Process(target=send_mouse_event,args=())
-    p1.start()
-    p1.join()
+# if __name__ == "__main__":
+#     multiprocessing.freeze_support()
+#     p1 = multiprocessing.Process(target=send_mouse_event,args=())
+#     p1.start()
+#     p1.join()
