@@ -52,19 +52,24 @@ def get_mouse_event():
     while True:
         local_cc = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
         local_cc.connect(remote_s_ep)
-        temp = local_cc.recv(1024)
-        if len(temp)>0:
-            event = pickle.loads(temp)
-            if event == "r":
-                # mouse.click('right')
-                print("                                  right")
-            elif event=="l":
-                # mouse.click('left')
-                print("left")
-            elif event == "m":
-                # mouse.click('middle')
-                print("             middle")
-        local_cc.close()
+        try:
+            temp = local_cc.recv(1024)
+            if len(temp)>0:
+                event = pickle.loads(temp)
+                if event == "r":
+                    # mouse.click('right')
+                    print("                                  right")
+                if event=="l":
+                    # mouse.click('left')
+                    print("left")
+                if event == "m":
+                    # mouse.click('middle')
+                    print("             middle")
+            time.sleep(0.1)
+            local_cc.close()
+        except NameError as e:
+            print("error : ",e)
+            local_cc.close()
 
 if __name__ == "__main__":
     multiprocessing.freeze_support()
@@ -77,3 +82,5 @@ if __name__ == "__main__":
     # p1.join()
     # p2.join()
     p3.join()
+    while True:
+        continue
