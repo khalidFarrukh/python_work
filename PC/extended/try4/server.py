@@ -14,7 +14,8 @@ import win32api
 
 
 SCREEN_SIZE = tuple(pyautogui.size())
-
+hip = "0.0.0.0"
+rhip = "0.0.0.0"
 def get_screen():
     root = Tk()
     frame = pyautogui.screenshot()
